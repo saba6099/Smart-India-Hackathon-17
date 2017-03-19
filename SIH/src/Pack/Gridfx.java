@@ -1,8 +1,6 @@
 package Pack;
 
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application; 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,13 +14,19 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage; 
 
 public class Gridfx extends Application { 
-      double lat=8.893260000000001;
+        WebView browser = new WebView();
+        WebEngine webEngine = browser.getEngine();
+        double lat=8.893260000000001;
         double lan = 76.61427;  
+        void moveMarker(double lat ,double lan)
+        {
+            webEngine.executeScript("moveMarker(" +lat+","+lan+")");
+        }
    @Override 
    public void start(Stage stage) {      
       //creating label email 
-        WebView browser = new WebView();
-        WebEngine webEngine = browser.getEngine();
+        
+        
          URL urlHello = getClass().getResource("newhtml.html");
                   webEngine.load(urlHello.toExternalForm());
        
@@ -33,7 +37,7 @@ public class Gridfx extends Application {
             @Override
             public void handle(ActionEvent t) {
                 lat=lat+0.0001;
-                webEngine.executeScript("moveMarker(" +lat+","+lan+")");
+                moveMarker(lat, lan);
             }
         });
                      
@@ -42,7 +46,7 @@ public class Gridfx extends Application {
             @Override
             public void handle(ActionEvent t) {
                lat=lat-0.0001;
-               webEngine.executeScript("moveMarker(" +lat+","+lan+")");                 
+                moveMarker(lat, lan);
             }
         });
       
@@ -52,7 +56,7 @@ public class Gridfx extends Application {
             @Override
             public void handle(ActionEvent t) {
             lan=lan+0.0002;
-            webEngine.executeScript("moveMarker(" +lat+","+lan+")");      
+            moveMarker(lat, lan);      
             }
         });
       
@@ -62,7 +66,7 @@ public class Gridfx extends Application {
             @Override
             public void handle(ActionEvent t) {       
             lan=lan-0.0002;
-            webEngine.executeScript("moveMarker(" +lat+","+lan+")");
+            moveMarker(lat, lan);
             }
         });
       
@@ -107,7 +111,5 @@ public class Gridfx extends Application {
       //Displaying the contents of the stage 
       stage.show(); 
    } 
-   public static void main(String args[]){ 
-      launch(args); 
-   } 
+ 
 } 
