@@ -30,71 +30,39 @@ public class Gridfx extends Application {
       //Creating Buttons 
       Button button1 = new Button("Up"); 
       button1.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent t) {
-           
-
-                 
-        lat=lat+0.0001;
-        
-        webEngine.executeScript("moveMarker(" +lat+","+lan+")");
-        
-         
-                 
-         //To change body of generated methods, choose Tools | Templates.
+                lat=lat+0.0001;
+                webEngine.executeScript("moveMarker(" +lat+","+lan+")");
             }
         });
                      
       Button button2 = new Button("Down");  
       button2.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent t) {
-           
-
-                 
-        lat=lat-0.0001;
-        
-        webEngine.executeScript("moveMarker(" +lat+","+lan+")");
-        
-         
-                 
-         //To change body of generated methods, choose Tools | Templates.
+               lat=lat-0.0001;
+               webEngine.executeScript("moveMarker(" +lat+","+lan+")");                 
             }
         });
+      
       Button button3 = new Button("Right");  
       button3.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {
-           
-
-                 
-        
-        lan=lan+0.0002;
-        webEngine.executeScript("moveMarker(" +lat+","+lan+")");
-        
-         
-                 
-         //To change body of generated methods, choose Tools | Templates.
+            lan=lan+0.0002;
+            webEngine.executeScript("moveMarker(" +lat+","+lan+")");      
             }
         });
+      
       Button button4 = new Button("Left");  
       button4.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
-            public void handle(ActionEvent t) {
-           
-
-                 
-        
-        lan=lan-0.0002;
-        webEngine.executeScript("moveMarker(" +lat+","+lan+")");
-        
-         
-                 
-         //To change body of generated methods, choose Tools | Templates.
+            public void handle(ActionEvent t) {       
+            lan=lan-0.0002;
+            webEngine.executeScript("moveMarker(" +lat+","+lan+")");
             }
         });
       
