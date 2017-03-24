@@ -1,6 +1,9 @@
 package Pack;
 
 import java.net.URL;
+import java.security.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application; 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,10 +18,16 @@ import javafx.stage.Stage;
 
 public class Gridfx extends Application { 
         WebView browser = new WebView();
+        
         WebEngine webEngine = browser.getEngine();
         double lat=8.893260000000001;
         double lan = 76.61427;  
         SerialTest st= new SerialTest();
+        
+        public Gridfx()
+        {
+            st.initialize();
+        }
         void moveMarker(double lat ,double lan)
         {
             webEngine.executeScript("moveMarker(" +lat+","+lan+")");
@@ -39,14 +48,42 @@ public class Gridfx extends Application {
             public void handle(ActionEvent t) {
                
                 
-                   st.initialize();
+                  
                
                //for (int i=0;i<10;i++)
                //{
                  //  if (st.flag){
-                  String received= st.getRead();
+               new Thread(){
+                public void run()
+                {
+                    while(true)
+                    {  
+                      
+                       long time1= System.currentTimeMillis();
+                        
+                        System.out.println("size"+st.q.size());
+                        
+                       if(st.q.peek()!=null)
+                        {
+                        String received= st.q.remove();
+                        long time2= System.currentTimeMillis();
+                        System.out.println("time"+(time2-time1));
+                        
+                        System.out.println("value"+received);
+                            try {
+                                sleep(500);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Gridfx.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
+                    }
+                    }
+                }
+            }.start();
+                        
+                  
                  // st.flag=false;
-                  System.out.println(""+received);
+                 
                    
                //}
                

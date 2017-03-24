@@ -16,6 +16,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 
 public class SerialTest implements SerialPortEventListener {
@@ -33,18 +36,12 @@ public class SerialTest implements SerialPortEventListener {
 	* making the displayed results codepage independent
 	*/
         public boolean flag=true;
-        public String read="abcd";
+        public Queue<String> q= new LinkedList<String>();
 	private BufferedReader input;
 	/** The output stream to the port */
 	private OutputStream output;
 
-    public String getRead() {
-        return read;
-    }
-
-    public void setRead(String read) {
-        this.read = read;
-    }
+  
         private BufferedWriter writer;
 	/** Milliseconds to block while waiting for port open */
 	private static final int TIME_OUT = 2000;
@@ -116,7 +113,7 @@ public class SerialTest implements SerialPortEventListener {
 			try {
                                 
 				 String in= input.readLine();
-                                 setRead(in);
+                                 q.add(in);
                                  flag=true; 
                                //System.out.println("receievd"+inputLine);
                                 
