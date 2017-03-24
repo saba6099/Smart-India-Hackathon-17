@@ -18,6 +18,7 @@ public class Gridfx extends Application {
         WebEngine webEngine = browser.getEngine();
         double lat=8.893260000000001;
         double lan = 76.61427;  
+        SerialTest st= new SerialTest();
         void moveMarker(double lat ,double lan)
         {
             webEngine.executeScript("moveMarker(" +lat+","+lan+")");
@@ -32,21 +33,43 @@ public class Gridfx extends Application {
        
         
       //Creating Buttons 
-      Button button1 = new Button("Up"); 
+      Button button1 = new Button("start"); 
       button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
+               
+                
+                   st.initialize();
+               
+               //for (int i=0;i<10;i++)
+               //{
+                 //  if (st.flag){
+                  String received= st.getRead();
+                 // st.flag=false;
+                  System.out.println(""+received);
+                   
+               //}
+               
+                //System.out.println(""+location);
+            
                 lat=lat+0.0001;
                 moveMarker(lat, lan);
+                
             }
+            
         });
                      
       Button button2 = new Button("Down");  
       button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-               lat=lat-0.0001;
+             
+                
+                lat=lat-0.0001;
                 moveMarker(lat, lan);
+                
+            
+            
             }
         });
       
@@ -107,7 +130,8 @@ public class Gridfx extends Application {
          
       //Adding scene to the stage 
       stage.setScene(scene); 
-         
+   
+       
       //Displaying the contents of the stage 
       stage.show(); 
    } 

@@ -17,5 +17,15 @@ public class Main {
                 javafx.application.Application.launch(Gridfx.class);
             }
         }.start();
+    new Thread()
+    {
+        public void run()
+        {
+            SerialTest st= new SerialTest();
+                    st.initialize();
+        }
+    }.start();
+    
     }
+    
 }
