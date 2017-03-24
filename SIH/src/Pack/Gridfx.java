@@ -65,11 +65,11 @@ public class Gridfx extends Application {
                         
                        if(st.q.peek()!=null)
                         {
-                        String received= st.q.remove();
+                        double[] received= st.q.remove();
                         long time2= System.currentTimeMillis();
                         System.out.println("time"+(time2-time1));
                         
-                        System.out.println("value"+received);
+                        System.out.println("value"+received[0]);
                             try {
                                 sleep(500);
                             } catch (InterruptedException ex) {

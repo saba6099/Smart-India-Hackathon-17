@@ -36,7 +36,7 @@ public class SerialTest implements SerialPortEventListener {
 	* making the displayed results codepage independent
 	*/
         public boolean flag=true;
-        public Queue<String> q= new LinkedList<String>();
+        public Queue<double[]> q= new LinkedList<double[]>();
 	private BufferedReader input;
 	/** The output stream to the port */
 	private OutputStream output;
@@ -111,8 +111,9 @@ public class SerialTest implements SerialPortEventListener {
             //System.out.println("new");
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
-                                
-				 String in= input.readLine();
+                                String s=input.readLine();
+				 double[] in= {Double.parseDouble( s),Double.parseDouble( s)};
+                                 
                                  q.add(in);
                                  flag=true; 
                                //System.out.println("receievd"+inputLine);
