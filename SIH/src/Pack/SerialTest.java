@@ -28,7 +28,7 @@ public class SerialTest implements SerialPortEventListener {
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
                         "/dev/ttyACM0", // Raspberry Pi
 			"/dev/ttyUSB0", // Linux
-			"COM3", // Windows
+			"COM5", // Windows
 	};
 	/**
 	* A BufferedReader which will be fed by a InputStreamReader 
@@ -115,20 +115,14 @@ public class SerialTest implements SerialPortEventListener {
 				 
                                  String words[]=s.split(",");
                                  double[] in= {Double.parseDouble( words[0]),Double.parseDouble( words[1])};
-                                 System.out.println(in[0]+" "+in[1]);
+                                //System.out.println(in[0]+" received "+in[1]);
                                  q.add(in);
-                                 flag=true; 
+                                 
                                //System.out.println("receievd"+inputLine);
                                 
                                 //if(in.equals("how"))
-                                {// System.out.println("yes");
-//                                output.write(("hello").getBytes());
-                                }
-                                
-                                    
-                                
-                                
-                                
+                                // System.out.println("yes");
+//                              //  output.write(("hello").getBytes());
                                 
 			} catch (Exception e) {
 				System.err.println(e.toString());

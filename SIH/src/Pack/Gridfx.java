@@ -47,40 +47,44 @@ public class Gridfx extends Application {
             @Override
             public void handle(ActionEvent t) {
                
-                
-                  
-               
-               //for (int i=0;i<10;i++)
-               //{
-                 //  if (st.flag){
-               new Thread(){
+                while(true)
+                       if(st.q.peek()!=null)
+                        {
+                        double[] received= st.q.remove();
+                            moveMarker(received[0], received[1]);
+                        }
+  
+              /* new Thread(){
                 public void run()
                 {
+                    System.out.println("run");
                     while(true)
                     {  
                       
                        long time1= System.currentTimeMillis();
                         
-                        System.out.println("size"+st.q.size());
+                       // System.out.println("size"+st.q.size());
                         
                        if(st.q.peek()!=null)
                         {
                         double[] received= st.q.remove();
                         long time2= System.currentTimeMillis();
-                        System.out.println("time"+(time2-time1));
+                      //  System.out.println("time"+(time2-time1));
                         
-                       // System.out.println("value"+received[0]);
-                            moveMarker(received[0], received[1]);
-                        try {
+                        System.out.println("value"+received[0]+","+received[1]);
+                        
+                        webEngine.executeScript("moveMarker(" +received[0]+","+received[1]+")");
+                            try {
                                 sleep(500);
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(Gridfx.class.getName()).log(Level.SEVERE, null, ex);
+                                //moveMarker(received[0], received[1]);
                             }
                             
                     }
                     }
                 }
-            }.start();
+            }.start();*/
                         
                   
                  // st.flag=false;
@@ -90,8 +94,8 @@ public class Gridfx extends Application {
                
                 //System.out.println(""+location);
             
-                lat=lat+0.0001;
-                moveMarker(lat, lan);
+               // lat=lat+0.0001;
+                //moveMarker(lat, lan);
                 
             }
             
