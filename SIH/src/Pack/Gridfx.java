@@ -69,8 +69,9 @@ public class Gridfx extends Application {
                         long time2= System.currentTimeMillis();
                         System.out.println("time"+(time2-time1));
                         
-                        System.out.println("value"+received[0]);
-                            try {
+                       // System.out.println("value"+received[0]);
+                            moveMarker(received[0], received[1]);
+                        try {
                                 sleep(500);
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(Gridfx.class.getName()).log(Level.SEVERE, null, ex);
