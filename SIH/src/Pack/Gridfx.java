@@ -5,6 +5,7 @@ import java.security.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application; 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets; 
@@ -30,7 +31,8 @@ public class Gridfx extends Application {
         }
         void moveMarker(double lat ,double lan)
         {
-            webEngine.executeScript("moveMarker(" +lat+","+lan+")");
+             Platform.runLater(()-> webEngine.executeScript("moveMarker(" +lat+","+lan+")"));
+            //webEngine.executeScript("moveMarker(" +lat+","+lan+")");
         }
    @Override 
    public void start(Stage stage) {      
@@ -47,56 +49,32 @@ public class Gridfx extends Application {
             @Override
             public void handle(ActionEvent t) {
                
-                while(true)
-                       if(st.q.peek()!=null)
-                        {
-                        double[] received= st.q.remove();
-                            moveMarker(received[0], received[1]);
-                        }
+                
   
-              /* new Thread(){
+               new Thread(){
                 public void run()
                 {
                     System.out.println("run");
                     while(true)
                     {  
                       
-                       long time1= System.currentTimeMillis();
-                        
-                       // System.out.println("size"+st.q.size());
-                        
                        if(st.q.peek()!=null)
                         {
                         double[] received= st.q.remove();
-                        long time2= System.currentTimeMillis();
-                      //  System.out.println("time"+(time2-time1));
-                        
-                        System.out.println("value"+received[0]+","+received[1]);
-                        
-                        webEngine.executeScript("moveMarker(" +received[0]+","+received[1]+")");
+                                                
+                           System.out.println("value"+received[0]+","+received[1]);
+                            moveMarker(received[0], received[1]);
                             try {
                                 sleep(500);
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(Gridfx.class.getName()).log(Level.SEVERE, null, ex);
-                                //moveMarker(received[0], received[1]);
+                               
                             }
                             
                     }
                     }
                 }
-            }.start();*/
-                        
-                  
-                 // st.flag=false;
-                 
-                   
-               //}
-               
-                //System.out.println(""+location);
-            
-               // lat=lat+0.0001;
-                //moveMarker(lat, lan);
-                
+            }.start();
             }
             
         });
@@ -177,5 +155,6 @@ public class Gridfx extends Application {
       //Displaying the contents of the stage 
       stage.show(); 
    } 
+   
  
 } 

@@ -28,7 +28,7 @@ public class SerialTest implements SerialPortEventListener {
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
                         "/dev/ttyACM0", // Raspberry Pi
 			"/dev/ttyUSB0", // Linux
-			"COM5", // Windows
+			"COM3", // Windows
 	};
 	/**
 	* A BufferedReader which will be fed by a InputStreamReader 
@@ -108,24 +108,19 @@ public class SerialTest implements SerialPortEventListener {
 	 * Handle an event on the serial port. Read the data and print it.
 	 */
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
-            //System.out.println("new");
+            
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
+                          
                                 String s=input.readLine();
-				 
+				                        //System.out.println("re"+s);
                                  String words[]=s.split(",");
                                  double[] in= {Double.parseDouble( words[0]),Double.parseDouble( words[1])};
                                 //System.out.println(in[0]+" received "+in[1]);
                                  q.add(in);
                                  
-                               //System.out.println("receievd"+inputLine);
-                                
-                                //if(in.equals("how"))
-                                // System.out.println("yes");
-//                              //  output.write(("hello").getBytes());
-                                
 			} catch (Exception e) {
-				System.err.println(e.toString());
+				System.err.println("serial"+e.toString());
 			}
 		}
 		// Ignore all the other eventTypes, but you should consider the other ones.
