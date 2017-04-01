@@ -1,5 +1,6 @@
 package Pack;
 
+import java.io.IOException;
 import java.net.URL;
 import java.security.Timestamp;
 import java.util.logging.Level;
@@ -12,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos; 
 import javafx.scene.Scene; 
 import javafx.scene.control.Button; 
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane; 
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -78,38 +80,51 @@ public class Gridfx extends Application {
             }
             
         });
-                     
-      Button button2 = new Button("Down");  
+                      TextField tf= new TextField();
+      tf.setText("$1:c"); 
+      Button button2 = new Button("Send");  
       button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
              
-                
-                lat=lat-0.0001;
-                moveMarker(lat, lan);
+                try {
+                    st.send(tf.getText());
+                } catch (IOException ex) {
+                    Logger.getLogger(Gridfx.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
                 
             
             
             }
         });
+    
+              
       
-      Button button3 = new Button("Right");  
+      Button button3 = new Button("0");  
       button3.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {
-            lan=lan+0.0002;
-            moveMarker(lat, lan);      
+            try {
+                
+                    st.send("$1:c0");
+                } catch (IOException ex) {
+                    Logger.getLogger(Gridfx.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
       
-      Button button4 = new Button("Left");  
+      Button button4 = new Button("1");  
       button4.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {       
-            lan=lan-0.0002;
-            moveMarker(lat, lan);
+                try {
+                    st.send("$1:c1");
+                } catch (IOException ex) {
+                    Logger.getLogger(Gridfx.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
       
@@ -126,11 +141,12 @@ public class Gridfx extends Application {
       //Setting the vertical and horizontal gaps between the columns 
       gridPane.setVgap(5); 
       gridPane.setHgap(5);       
-      
+      tf.setPrefWidth(60);
       //Setting the Grid alignment 
       gridPane.setAlignment(Pos.CENTER); 
       gridPane2.setAlignment(Pos.CENTER); 
       //Arranging all the nodes in the grid 
+      gridPane2.add(tf, 0, 0);
       gridPane2.add(button1, 1, 0);
       gridPane2.add(button2, 1, 2);
       gridPane2.add(button3, 2, 1);
@@ -139,7 +155,8 @@ public class Gridfx extends Application {
       gridPane.add(browser, 1, 0); 
      // gridPane.add(text2, 0, 1);       
       //gridPane.add(textField2, 1, 1); 
-      gridPane.add(gridPane2, 1, 2); 
+      gridPane.add(gridPane2, 1, 3); 
+     // gridPane.add(tf, 1, 2);
       //gridPane.add(button2, 1, 2);  
       
       //Creating a scene object 

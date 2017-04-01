@@ -27,7 +27,7 @@ public class SerialTest implements SerialPortEventListener {
 	private static final String PORT_NAMES[] = { 
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
                         "/dev/ttyACM0", // Raspberry Pi
-			"/dev/ttyUSB0", // Linux
+			"COM5", // Linux
 			"COM3", // Windows
 	};
 	/**
@@ -110,12 +110,19 @@ public class SerialTest implements SerialPortEventListener {
 	/**
 	 * Handle an event on the serial port. Read the data and print it.
 	 */
+        void send(String str) throws IOException
+        {
+            output.write(str.getBytes());
+            System.out.println("written"+str);
+        }
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
             
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
                           
+                            
                                 received=input.readLine();
+                                System.out.println(received);
                                 if(received.charAt(0)=='@' && received.charAt(received.length()-1)=='#')
                                 {
                                     	 tokens = received.split(delims);
