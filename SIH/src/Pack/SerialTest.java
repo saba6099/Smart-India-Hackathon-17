@@ -29,7 +29,7 @@ public class SerialTest implements SerialPortEventListener {
 	private static final String PORT_NAMES[] = { 
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
                         "/dev/ttyACM0", // Raspberry Pi
-			"COM5", // Linux
+			"COM4", // Linux
 			"COM3", // Windows
 	};
 	/**
@@ -58,7 +58,7 @@ public class SerialTest implements SerialPortEventListener {
                 System.out.println("serial test initialized");
             CommPortIdentifier portId = null;
 		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
-
+ 
 		//First, Find an instance of serial port as set in PORT_NAMES.
 		while (portEnum.hasMoreElements()) {
 			CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();

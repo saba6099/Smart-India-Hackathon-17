@@ -20,6 +20,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import java.util.TimerTask;
 import java.util.Timer;
+import javafx.scene.layout.Background;
 
 public class Gridfx extends Application  { 
         WebView browser = new WebView();
@@ -42,7 +43,7 @@ public class Gridfx extends Application  {
                 @Override
                 public void run() {
                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    System.out.println(st.latt);
+                    System.out.println(st.latt +"  "+ st.lng);
                     moveMarker(st.latt, st.lng);
                 }
             };
@@ -64,8 +65,9 @@ public class Gridfx extends Application  {
        
         
       //Creating Buttons 
-      Button button1 = new Button("start"); 
-      button1.setOnAction(new EventHandler<ActionEvent>() {
+      Button trackButton = new Button("TRACK");
+      Button landButton = new Button("LAND");
+      trackButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
        
@@ -102,7 +104,7 @@ public class Gridfx extends Application  {
             }
             
         });
-                      TextField tf= new TextField();
+         TextField tf= new TextField();
       tf.setText("$1:c"); 
       Button button2 = new Button("Send");  
       button2.setOnAction(new EventHandler<ActionEvent>() {
@@ -130,20 +132,20 @@ public class Gridfx extends Application  {
             public void handle(ActionEvent t) {
             try {
                 
-                    st.send("$1:c0");
+                    st.send("$1:c0#");
                 } catch (IOException ex) {
                     Logger.getLogger(Gridfx.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
       
-      Button button4 = new Button("1");  
-      button4.setOnAction(new EventHandler<ActionEvent>() {
+//      Button button4 = new Button("1");  
+      landButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {       
                 try {
-                    st.send("$1:c1");
+                    st.send("$1:c1#");
                 } catch (IOException ex) {
                     Logger.getLogger(Gridfx.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -155,29 +157,45 @@ public class Gridfx extends Application  {
       GridPane gridPane = new GridPane();    
       
       //Setting size for the pane  
-      gridPane.setMinSize(400, 200); 
+      gridPane.setMinSize(1400,650); 
        
       //Setting the padding  
       gridPane.setPadding(new Insets(10, 10, 10, 10)); 
-      
+      browser.setMinSize(1200, 800);
       //Setting the vertical and horizontal gaps between the columns 
       gridPane.setVgap(5); 
       gridPane.setHgap(5);       
-      tf.setPrefWidth(60);
+//      tf.setPrefWidth(60);
       //Setting the Grid alignment 
-      gridPane.setAlignment(Pos.CENTER); 
+//      gridPane.setAlignment(Pos.CENTER); 
+//      gridPane2.setMinSize(100,60); 
       gridPane2.setAlignment(Pos.CENTER); 
       //Arranging all the nodes in the grid 
-      gridPane2.add(tf, 0, 0);
-      gridPane2.add(button1, 1, 0);
-      gridPane2.add(button2, 1, 2);
-      gridPane2.add(button3, 2, 1);
-      gridPane2.add(button4, 0, 1);
+//      gridPane2.add(tf, 0, 0);
+//      gridPane2.add(button1, 1, 0);
+//      gridPane2.add(button2, 1, 2);
+//      gridPane2.add(button3, 2, 1);
+//      gridPane2.add(button4, 0, 1);
      // gridPane.add(text1, 0, 0); 
-      gridPane.add(browser, 1, 0); 
+      gridPane2.add(trackButton,0,0);
+      gridPane2.add(landButton,0,1);
+      trackButton.setPrefSize(120,80);
+      landButton.setPrefSize(120,80);
+//      trackButton.setBackground(Background.);
+      trackButton.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
+      landButton.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
+//        trackButton.setTranslateX(1100);
+//        trackButton.setTranslateY(300);
+      gridPane.add(browser, 0, 0);
+      
+      gridPane.add(gridPane2,1,0);
+//      gridPane.add(landButton,1,1);
+      gridPane.setStyle("-fx-background-color: Black;");
+              
+              
      // gridPane.add(text2, 0, 1);       
       //gridPane.add(textField2, 1, 1); 
-      gridPane.add(gridPane2, 1, 3); 
+//      gridPane.add(gridPane2, 1, 3); 
      // gridPane.add(tf, 1, 2);
       //gridPane.add(button2, 1, 2);  
       
@@ -185,7 +203,7 @@ public class Gridfx extends Application  {
       Scene scene = new Scene(gridPane);  
       
       //Setting title to the Stage 
-      stage.setTitle("Grid Pane Example"); 
+      stage.setTitle("Beacon Interface"); 
          
       //Adding scene to the stage 
       stage.setScene(scene); 
