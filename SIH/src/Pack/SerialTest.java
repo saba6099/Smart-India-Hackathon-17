@@ -35,6 +35,9 @@ public class SerialTest implements SerialPortEventListener {
 	* converting the bytes into characters 
 	* making the displayed results codepage independent
 	*/
+        private String received; 
+        private String delims="[@:,#]";
+        private String[] tokens;
         public boolean flag=true;
         public Queue<double[]> q= new LinkedList<double[]>();
 	private BufferedReader input;
@@ -112,11 +115,16 @@ public class SerialTest implements SerialPortEventListener {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
                           
-                                String s=input.readLine();
+                                received=input.readLine();
+                                if(received.charAt(0)=='@' && received.charAt(received.length()-1)=='#')
+                                {
+                                    	 tokens = received.split(delims);
+
                                 
-                          
-                                String words[]=s.split(",");
-                                 double[] in= {Double.parseDouble( words[0]),Double.parseDouble( words[1])};
+                                }
+                            //System.out.println(tokens[2]);
+                                
+                                 double[] in= {Double.parseDouble( tokens[2]),Double.parseDouble( tokens[3])};
                                 
                                  q.add(in);
                                  
@@ -124,7 +132,7 @@ public class SerialTest implements SerialPortEventListener {
 				System.err.println("serial"+e.toString());
 			}
 		}
-		// Ignore all the other eventTypes, but you should consider the other ones.
+		
 	}
 
 	/*public static void main(String[] args) throws Exception {
