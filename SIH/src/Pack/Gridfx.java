@@ -15,11 +15,17 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane; 
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage; 
+import javafx.stage.Stage;
+import java.util.TimerTask;
+import java.util.Timer;
 
-public class Gridfx extends Application { 
+public class Gridfx extends Application  { 
         WebView browser = new WebView();
-        
+        TimerTask tk=null;     
+   
+                
+        Timer timer=null;
+       
         WebEngine webEngine = browser.getEngine();
         double lat=8.893260000000001;
         double lan = 76.61427;  
@@ -27,7 +33,19 @@ public class Gridfx extends Application {
         
         public Gridfx()
         {
+    
             st.initialize();
+            tk= new TimerTask() {
+
+                @Override
+                public void run() {
+                    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    System.out.println(st.latt);
+                    moveMarker(st.latt, st.lng);
+                }
+            };
+            timer= new Timer();
+           
         }
         void moveMarker(double lat ,double lan)
         {
@@ -48,10 +66,14 @@ public class Gridfx extends Application {
       button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-               
-                
+       
+                timer.scheduleAtFixedRate(tk, 1000, 500);         
+    /*            
   
-               new Thread(){
+//               new Thread(){
+//        public class RunMeTask extends TimerTask
+        {
+                @Override
                 public void run()
                 {
                     System.out.println("run");
@@ -64,17 +86,17 @@ public class Gridfx extends Application {
                                                 
                            System.out.println("value"+received[0]+","+received[1]);
                             moveMarker(received[0], received[1]);
-                            try {
-                                sleep(500);
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(Gridfx.class.getName()).log(Level.SEVERE, null, ex);
-                               
-                            }
+//                            try {
+//                                sleep(500);
+//                            } catch (InterruptedException ex) {
+//                                Logger.getLogger(Gridfx.class.getName()).log(Level.SEVERE, null, ex);
+//                               
+//                            }
                             
                     }
                     }
                 }
-            }.start();
+//            }.start();*/
             }
             
         });

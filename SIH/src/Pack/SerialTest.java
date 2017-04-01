@@ -19,6 +19,8 @@ import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.TimerTask;
+
 
 
 public class SerialTest implements SerialPortEventListener {
@@ -35,6 +37,7 @@ public class SerialTest implements SerialPortEventListener {
 	* converting the bytes into characters 
 	* making the displayed results codepage independent
 	*/
+        public double latt,lng;
         private String received; 
         private String delims="[@:,#]";
         private String[] tokens;
@@ -112,6 +115,7 @@ public class SerialTest implements SerialPortEventListener {
 	 */
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
             
+            
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
                           
@@ -123,7 +127,8 @@ public class SerialTest implements SerialPortEventListener {
                                 
                                 }
                             //System.out.println(tokens[2]);
-                                
+                                latt=Double.parseDouble( tokens[2]);
+                                lng=Double.parseDouble( tokens[3]);
                                  double[] in= {Double.parseDouble( tokens[2]),Double.parseDouble( tokens[3])};
                                 
                                  q.add(in);
