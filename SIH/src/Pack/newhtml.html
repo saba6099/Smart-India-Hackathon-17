@@ -24,7 +24,7 @@
 			  mapTypeId: google.maps.MapTypeId.ROADMAP
 			});
 			
-                        marker=new google.maps.Marker({map:map,icon:"http://maps.google.com/mapfiles/ms/micons/blue.png"});
+                        marker=new google.maps.Marker({map:map,icon:"http://maps.google.com/mapfiles/ms/micons/blue.png",draggable:true});
                         route = new google.maps.Polyline({
 				path: [],
 				geodesic : true,

@@ -41,7 +41,7 @@ public class SerialTest implements SerialPortEventListener {
 	/** The output stream to the port */
 	private OutputStream output;
 
-  
+ 
         private BufferedWriter writer;
 	/** Milliseconds to block while waiting for port open */
 	private static final int TIME_OUT = 2000;
@@ -113,10 +113,11 @@ public class SerialTest implements SerialPortEventListener {
 			try {
                           
                                 String s=input.readLine();
-				                        //System.out.println("re"+s);
-                                 String words[]=s.split(",");
+                                
+                          
+                                String words[]=s.split(",");
                                  double[] in= {Double.parseDouble( words[0]),Double.parseDouble( words[1])};
-                                //System.out.println(in[0]+" received "+in[1]);
+                                
                                  q.add(in);
                                  
 			} catch (Exception e) {
